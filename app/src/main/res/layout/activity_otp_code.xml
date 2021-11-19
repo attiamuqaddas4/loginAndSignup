@@ -60,8 +60,17 @@
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@color/white"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            android:visibility="visible"/>
 
+        <ProgressBar
+            android:id="@+id/pbSendingOtp"
+            android:layout_marginTop="70dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            />
     </LinearLayout>
 
 

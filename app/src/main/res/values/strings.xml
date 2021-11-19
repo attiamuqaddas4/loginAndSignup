@@ -11,7 +11,7 @@
     <string name="privacy_text">By creating an account, you agree to the \nTerms of Use and Privacy Policy</string>
     <string name="already_account_text">Already have an account ?</string>
     <string name="otp">Generate OTP</string>
-    <string name="next">Next</string>
+    <string name="getotp">Get OTP</string>
     <string name="code">Enter OTP</string>
     <string name="confirm">Confirm</string>
 </resources>

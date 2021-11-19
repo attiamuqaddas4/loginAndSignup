@@ -46,6 +46,7 @@ tools:context=".LoginActivity">
             android:paddingHorizontal="16dp">
 
             <com.hbb20.CountryCodePicker
+                android:id="@+id/codePicker"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 app:contentColor="@color/grey"
@@ -54,24 +55,41 @@ tools:context=".LoginActivity">
                 app:showFullName="false" />
 
             <EditText
+                android:id="@+id/edtNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/grey" />
+                android:backgroundTint="@color/grey"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:inputType="number"
+                android:autofillHints="333-1234567" />
         </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnLogin"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:background="@drawable/button_style"
-            android:padding="10dp"
-            android:text="@string/next"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="22sp" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/button_style"
+                android:padding="10dp"
+                android:text="@string/getotp"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:visibility="visible"/>
+
+            <ProgressBar
+                android:id="@+id/pbSendingOtp"
+                android:layout_marginTop="70dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                />
+
+
 
     </LinearLayout>
 
