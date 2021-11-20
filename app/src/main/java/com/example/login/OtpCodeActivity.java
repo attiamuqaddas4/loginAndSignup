@@ -27,8 +27,12 @@ public class OtpCodeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!pinView.getText().toString().trim().isEmpty()){
-                    Toast.makeText(OtpCodeActivity.this, "Oty verify",Toast.LENGTH_SHORT).show();
-                } else {
+                    if(pinView.getText().toString().trim().equals(getOtp))
+                        Toast.makeText(OtpCodeActivity.this, "Otp verified",Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(OtpCodeActivity.this, "You entered invalid otp",Toast.LENGTH_SHORT).show();
+                }
+                else {
                     Toast.makeText(OtpCodeActivity.this,"Please enter OTP",Toast.LENGTH_SHORT).show();
                 }
             }

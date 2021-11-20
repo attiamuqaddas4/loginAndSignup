@@ -47,22 +47,21 @@ public class OtpActivity extends AppCompatActivity {
 
         ProgressBar pbSendingOtp=findViewById(R.id.pbSendingOtp);
 
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Initialize Firebase Auth
-                mAuth = FirebaseAuth.getInstance();
+
                 phoneNumber=edtNumber.getText().toString().trim();
 
-
-                if(!edtNumber.getText().toString().trim().isEmpty()){
-                    if((edtNumber.getText().toString().trim()).length()==10){
-
-
+                if(!phoneNumber.isEmpty()){
+                    if((phoneNumber).length()==10){
 
                         PhoneAuthOptions options =
                                 PhoneAuthOptions.newBuilder(mAuth)
-                                        .setPhoneNumber(phoneNumber)       // Phone number to verify
+                                        .setPhoneNumber("+" + codePicker.getSelectedCountryCode() + phoneNumber)       // Phone number to verify
                                         .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
                                         .setActivity(OtpActivity.this)                 // Activity (for callback binding)
                                         .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -108,16 +107,13 @@ public class OtpActivity extends AppCompatActivity {
 
                                                 // Save verification ID and token so we can use them later
                                                 Intent intent=new Intent(getApplicationContext(),OtpCodeActivity.class);
-                                                intent.putExtra("mobile", codePicker.getSelectedCountryCode() + edtNumber.getText().toString());
+                                                intent.putExtra("mobile", "+" + codePicker.getSelectedCountryCode() + edtNumber.getText().toString());
                                                 intent.putExtra("backendotp",token);
                                                 startActivity(intent);
                                                 // The SMS verification code has been sent to the provided phone number, we
                                                 // now need to ask the user to enter the code and then construct a credential
                                                 // by combining the code with a verification ID.
                                                 Log.d(TAG, "onCodeSent:" + verificationId);
-
-
-
                                             }
                                         })          // OnVerificationStateChangedCallbacks
                                         .build();
@@ -147,65 +143,6 @@ public class OtpActivity extends AppCompatActivity {
         }
     }
 
-    private void createAccount(String email, String password) {
-        // [START create_user_with_email]
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(OtpActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-                    }
-                });
-        // [END create_user_with_email]
-    }
-
-    private void signIn(String email, String password) {
-        // [START sign_in_with_email]
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(OtpActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-                    }
-                });
-        // [END sign_in_with_email]
-    }
-
-    private void sendEmailVerification() {
-        // Send verification email
-        // [START send_email_verification]
-        final FirebaseUser user = mAuth.getCurrentUser();
-        user.sendEmailVerification()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        // Email sent
-                    }
-                });
-        // [END send_email_verification]
-    }
 
     private void reload() { }
 
