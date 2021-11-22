@@ -156,7 +156,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="25dp"
-            android:background="@drawable/button_style"
             android:padding="10dp"
             android:textAlignment="center"
             android:text="@string/sign_up_text"

@@ -43,6 +43,7 @@
             android:id="@+id/pinView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="18sp"
             app:itemCount="6"
             android:layout_marginHorizontal="50dp"
             style="@style/PinWidget.PinView" />
@@ -54,7 +55,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="25dp"
-            android:background="@drawable/button_style"
             android:padding="10dp"
             android:text="@string/confirm"
             android:textAlignment="center"
